@@ -1,1 +1,5 @@
 .config/hyprlock/wallpapers/
+*.bak
+*.backup
+*.bak
+*.backup
