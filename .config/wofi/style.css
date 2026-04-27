@@ -1,0 +1,50 @@
+window {
+  margin: 0px;
+  border: 1px solid #928374;
+  background-color: #c0c0c0;
+  border-radius: 0px; /* Rounded corners */
+  font-family: "JetBrainsMono Nerd Font", monospace; /* Set font */
+}
+
+#input {
+  margin: 5px;
+  padding: 10px; /* Added padding for better spacing */
+  border: none;
+  color: #000000;
+  background-color: #ffffff;
+  border-radius: 0px; /* Rounded corners */
+  font-family: "JetBrainsMono Nerd Font", monospace; /* Set font */
+}
+
+#inner-box {
+  margin: 5px;
+  border: none;
+  background-color: #c0c0c0;
+  border-radius: 0px; /* Rounded corners */
+}
+
+#outer-box {
+  margin: 5px;
+  border: none;
+  background-color: #c0c0c0;
+  border-radius: 0px; /* Rounded corners */
+}
+
+#scroll {
+  margin: 0px;
+  border: none;
+}
+
+#text {
+  margin: 5px;
+  padding-right: 10px; /* Added padding-right for space between icon and title */
+  border: none;
+  color: #000000;
+  font-family: "JetBrainsMono Nerd Font", monospace; /* Set font */
+}
+
+#entry:selected {
+  background-color: #ffffff;
+  border-radius: 0px; /* Rounded corners */
+  font-family: "JetBrainsMono Nerd Font", monospace; /* Set font */
+}
