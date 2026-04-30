@@ -1,33 +1,42 @@
 window {
   margin: 0px;
-  border: 1px solid #928374;
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #808080;
+  border-bottom: 2px solid #808080;
   background-color: #c0c0c0;
-  border-radius: 0px; /* Rounded corners */
-  font-family: "JetBrainsMono Nerd Font", monospace; /* Set font */
+  border-radius: 0px;
+  font-family: "More Perfect DOS VGA", monospace;
 }
 
 #input {
   margin: 5px;
-  padding: 10px; /* Added padding for better spacing */
-  border: none;
+  padding: 4px 6px;
   color: #000000;
   background-color: #ffffff;
-  border-radius: 0px; /* Rounded corners */
-  font-family: "JetBrainsMono Nerd Font", monospace; /* Set font */
+  border-radius: 0px;
+  border-top: 2px solid #808080;
+  border-left: 2px solid #808080;
+  border-right: 2px solid #ffffff;
+  border-bottom: 2px solid #ffffff;
+  font-family: "More Perfect DOS VGA", monospace;
 }
 
 #inner-box {
   margin: 5px;
   border: none;
   background-color: #c0c0c0;
-  border-radius: 0px; /* Rounded corners */
+  border-radius: 0px;
 }
 
 #outer-box {
   margin: 5px;
-  border: none;
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #808080;
+  border-bottom: 2px solid #808080;
   background-color: #c0c0c0;
-  border-radius: 0px; /* Rounded corners */
+  border-radius: 0px;
 }
 
 #scroll {
@@ -37,14 +46,17 @@ window {
 
 #text {
   margin: 5px;
-  padding-right: 10px; /* Added padding-right for space between icon and title */
+  padding-right: 10px;
   border: none;
   color: #000000;
-  font-family: "JetBrainsMono Nerd Font", monospace; /* Set font */
+  font-family: "More Perfect DOS VGA", monospace;
 }
 
 #entry:selected {
-  background-color: #ffffff;
-  border-radius: 0px; /* Rounded corners */
-  font-family: "JetBrainsMono Nerd Font", monospace; /* Set font */
+  background-color: #000080;
+  border-radius: 0px;
+}
+
+#entry:selected #text {
+  color: #ffffff;
 }
