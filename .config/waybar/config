@@ -13,7 +13,8 @@
         "custom/filemanager",
         "custom/browser",
         "custom/separator",
-        "hyprland/workspaces"
+        "hyprland/workspaces",
+	"custom/minimized"
     ],
     "modules-center": ["mpris"],
     "modules-right": [
@@ -74,6 +75,14 @@
         "format": "{name}",
         "all-outputs": true,
         "on-click": "activate"
+    },
+    
+    "custom/minimized": {
+	    "format": "_ {}",
+	    "exec": "hyprctl clients -j | python3 -c \"import json,sys; clients=[c for c in json.load(sys.stdin) if c['workspace']['name']=='special:special']; print(len(clients) if clients else '')\" 2>/dev/null",
+    "interval": 2,
+    "on-click": "~/.config/hypr/scripts/restore.sh",
+    "tooltip": false
     },
 
     "tray": {
