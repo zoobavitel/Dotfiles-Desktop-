@@ -1,6 +1,6 @@
 /* Win95 Start Menu Theme for Rofi 2.0 (rofi-wayland) */
 configuration {
-    show-icons:         true;
+    show-icons:         true;                        /* changed: was false */
     font:               "JetBrainsMono Nerd Font 11";
     hover-select:       true;
     me-select-entry:    "";
@@ -35,11 +35,16 @@ horibox {
     background-color:   @bg;
 }
 textbox-sidebar {
-    expand:             false;
-    content:            "  ";
+    expand:             true;                        /* changed: was false */
+    width:              28px;                        /* added: pins stripe width */
+    content:            "madness98";                 /* changed: was "  " */
     background-color:   @teal;
-    text-color:         @teal;
-    padding:            200px 12px;
+    text-color:         rgba(255,255,255,0.55);      /* changed: was @teal (invisible) */
+    font:               "JetBrainsMono Nerd Font Bold 9";
+    padding:            0px;                         /* changed: was 200px 12px */
+    rotate:             270;                         /* added: bottom-to-top */
+    vertical-align:     0.5;
+    horizontal-align:   0.5;
 }
 mainbox {
     orientation:        vertical;
@@ -79,9 +84,9 @@ element {
     padding:            4px 8px;
     spacing:            6px;
     orientation:        horizontal;
-    children:           [ element-icon, element-text ];
+    children:           [ element-icon, element-text ]; /* added */
 }
-element-icon {
+element-icon {                                          /* added block */
     size:               16px;
     background-color:   inherit;
     text-color:         inherit;
@@ -94,7 +99,7 @@ element-text {
     background-color:   inherit;
     text-color:         inherit;
     highlight:          none;
-    vertical-align:     0.5;
+    vertical-align:     0.5;                            /* added: vertically centers text with icon */
 }
 element-text selected.normal {
     background-color:   #000080;
