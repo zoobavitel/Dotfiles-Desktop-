@@ -1,0 +1,4 @@
+#!/bin/bash
+TEMP=$(sensors k10temp-pci-00c3 2>/dev/null | awk '/Tctl/ {gsub(/[+°C]/,"",$2); print int($2)}')
+[ -z "$TEMP" ] && TEMP=$(sensors 2>/dev/null | awk '/Tctl/ {gsub(/[+°C]/,"",$2); print int($2); exit}')
+echo "🌡 ${TEMP}°C"

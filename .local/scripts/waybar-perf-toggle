@@ -1,0 +1,13 @@
+#!/bin/bash
+CURRENT=$(cat /sys/firmware/acpi/platform_profile)
+case "$CURRENT" in
+    performance)
+        echo "balanced" | sudo tee /sys/firmware/acpi/platform_profile > /dev/null
+        sudo cpupower frequency-set -g powersave > /dev/null
+        ;;
+    *)
+        echo "performance" | sudo tee /sys/firmware/acpi/platform_profile > /dev/null
+        sudo cpupower frequency-set -g performance > /dev/null
+        ;;
+esac
+pkill -RTMIN+8 waybar

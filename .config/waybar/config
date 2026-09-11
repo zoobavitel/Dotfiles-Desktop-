@@ -19,6 +19,10 @@
     "modules-center": ["mpris"],
     "modules-right": [
         "tray",
+	"custom/separator-right",
+	"custom/lact",
+	"custom/cputemp",
+	"custom/perf-mode",
         "custom/separator-right",
         "custom/pacman",
 	"pulseaudio",
@@ -83,6 +87,28 @@
     "interval": 2,
     "on-click": "~/.config/hypr/scripts/restore.sh",
     "tooltip": false
+    },
+    
+    "custom/perf-mode": {
+    	"exec": "~/.local/scripts/waybar-perf-status",
+    	"return-type": "json",
+    	"interval": 5,
+    	"signal": 8,
+    	"on-click": "~/.local/scripts/waybar-perf-toggle",
+    	"tooltip": true
+    },
+    
+    "custom/cputemp": {
+    	"exec": "~/.local/scripts/waybar-cputemp",
+    	"interval": 5,
+    	"tooltip": false
+    },
+
+    "custom/lact": {
+    	"format": "🎮 GPU",
+    	"tooltip-format": "Open LACT GPU Control",
+    	"on-click": "lact",
+    	"tooltip": true
     },
 
     "tray": {
@@ -158,6 +184,6 @@
         "interval": 100,
         "exec": "~/.local/scripts/checkupdate",
         "exec-if": "exit 0",
-        "on-click": "kitty -e sudo pacman -Syu"
+        "on-click": "kitty -e bash -c 'yay -Syu; stty sane 2>/dev/null; echo; printf \"Press any key to close...\"; read -rsn1 </dev/tty'"
     }
 }

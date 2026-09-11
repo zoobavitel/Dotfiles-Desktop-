@@ -1,0 +1,8 @@
+#!/bin/bash
+PROFILE=$(cat /sys/firmware/acpi/platform_profile)
+case "$PROFILE" in
+    performance) echo '{"text":"⚡ Perf","tooltip":"Performance — click for Balanced","class":"performance"}' ;;
+    balanced)    echo '{"text":"⚖ Bal", "tooltip":"Balanced — click for Performance","class":"balanced"}' ;;
+    low-power)   echo '{"text":"🌿 Low", "tooltip":"Low Power — click for Performance","class":"low-power"}' ;;
+    *)           echo '{"text":"? Mode","tooltip":"Unknown","class":"unknown"}' ;;
+esac

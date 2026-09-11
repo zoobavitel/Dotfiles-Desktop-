@@ -19,6 +19,7 @@ main_menu() {
     echo "───────────"
     echo "🚪 Log Out"
     echo "💤 Sleep"
+    echo "💾 Hibernate"
     echo "🔄 Restart"
     echo "⏻ Shut Down"
 }
@@ -96,8 +97,9 @@ run_menu() {
 }
 
 do_logout()   { hyprctl dispatch exit; }
-do_sleep()    { systemctl suspend; }
-do_restart()  { systemctl reboot; }
+do_sleep()      { systemctl suspend; }
+do_hibernate()  { systemctl hibernate; }
+do_restart()    { systemctl reboot; }
 do_shutdown() { systemctl poweroff; }
 
 selected=$(main_menu | rofi -dmenu \
@@ -116,8 +118,9 @@ case "$selected" in
     "🔍 Find Files")  find_menu ;;
     "▶ Run...")        run_menu ;;
     "🚪 Log Out")     do_logout ;;
-    "💤 Sleep")       do_sleep ;;
-    "🔄 Restart")     do_restart ;;
+    "💤 Sleep")         do_sleep ;;
+    "💾 Hibernate")     do_hibernate ;;
+    "🔄 Restart")       do_restart ;;
     "⏻ Shut Down")   do_shutdown ;;
     "───────────")     ;; # separator
 esac
