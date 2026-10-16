@@ -98,7 +98,10 @@ tooltip {
 #pulseaudio,
 #network,
 #bluetooth,
-#custom-pacman {
+#custom-pacman,
+#custom-lact,
+#custom-cputemp,
+#custom-perf-mode {
   margin: 3px 2px;
   padding: 2px 8px;
   background: #c0c0c0;
@@ -107,6 +110,29 @@ tooltip {
   border-left: 1px solid #ffffff;
   border-right: 1px solid #808080;
   border-bottom: 1px solid #808080;
+}
+
+#pulseaudio:hover,
+#network:hover,
+#bluetooth:hover,
+#custom-pacman:hover,
+#custom-lact:hover,
+#custom-cputemp:hover,
+#custom-perf-mode:hover {
+  background: #d4d0c8;
+}
+
+#pulseaudio:active,
+#network:active,
+#bluetooth:active,
+#custom-pacman:active,
+#custom-lact:active,
+#custom-cputemp:active,
+#custom-perf-mode:active {
+  border-top: 1px solid #808080;
+  border-left: 1px solid #808080;
+  border-right: 1px solid #ffffff;
+  border-bottom: 1px solid #ffffff;
 }
 
 /* Media player */
@@ -141,6 +167,40 @@ tooltip {
   color: #000000;
   border-top: 1px solid #808080;
   border-left: 1px solid #808080;
+  border-right: 1px solid #ffffff;
+  border-bottom: 1px solid #ffffff;
+}
+
+/* Minimized apps button */
+#custom-minimized {
+  margin: 3px 2px;
+  padding: 3px 12px;
+  background: #c0c0c0;
+  color: #000000;
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #000000;
+  border-bottom: 2px solid #000000;
+  min-width: 30px;
+}
+
+/* Pressed/active look when windows are minimized */
+#custom-minimized.minimized {
+  border-top: 1px solid #000000;
+  border-left: 1px solid #000000;
+  border-right: 1px solid #ffffff;
+  border-bottom: 1px solid #ffffff;
+  padding: 4px 12px 2px 12px;
+  background: #c0c0c0;
+}
+
+#custom-minimized:hover {
+  background: #d4d0c8;
+}
+
+#custom-minimized:active {
+  border-top: 1px solid #000000;
+  border-left: 1px solid #000000;
   border-right: 1px solid #ffffff;
   border-bottom: 1px solid #ffffff;
 }

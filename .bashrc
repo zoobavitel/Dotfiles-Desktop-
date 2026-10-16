@@ -14,3 +14,7 @@ export PATH="$HOME/Applications:$PATH"
 # Created by `pipx` on 2026-04-21 17:54:50
 export PATH="$PATH:/home/z/.local/bin"
 alias dot='git --git-dir=/home/z/git/Dotfiles-Desktop-/.git --work-tree=/home/z'
+
+# aur-guard
+alias yay='yay-guard'
+alias paru='paru-guard'

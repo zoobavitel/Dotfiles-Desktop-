@@ -1,7 +1,7 @@
 /* Win95 Start Menu Theme for Rofi 2.0 (rofi-wayland) */
-
 configuration {
-    show-icons:         false;
+    show-icons:         true;
+    icon-theme:         "SE98";
     font:               "JetBrainsMono Nerd Font 11";
     hover-select:       true;
     me-select-entry:    "";
@@ -9,14 +9,13 @@ configuration {
 }
 
 * {
-    bg:         #c0c0c0;
-    bg-dark:    #808080;
-    bg-light:   #ffffff;
-    fg:         #000000;
-    highlight:  #000080;
-    hilite-fg:  #ffffff;
-    teal:       #008080;
-
+    bg:                 #c0c0c0;
+    bg-dark:            #808080;
+    bg-light:           #ffffff;
+    fg:                 #000000;
+    highlight:          #000080;
+    hilite-fg:          #ffffff;
+    teal:               #008080;
     background-color:   @bg;
     text-color:         @fg;
 }
@@ -25,8 +24,8 @@ window {
     anchor:             southwest;
     location:           southwest;
     width:              260px;
-    x-offset:           0;
-    y-offset:           0;
+    x-offset:           0px;
+    y-offset:           0px;
     background-color:   @bg;
     border:             2px;
     border-color:       @bg-light;
@@ -58,7 +57,7 @@ inputbar {
     children:           [ entry ];
     background-color:   @bg;
     padding:            4px 6px;
-    border:             0 0 1px 0;
+    border:             0px 0px 1px 0px;
     border-color:       @bg-dark;
 }
 
@@ -75,30 +74,43 @@ entry {
 listview {
     background-color:   @bg;
     columns:            1;
-    lines:              9;
+    lines:              14;
     spacing:            0px;
-    padding:            2px 0;
+    padding:            2px 0px;
     scrollbar:          false;
-    fixed-height:       true;
-    dynamic:            false;
+    fixed-height:       false;
+    dynamic:            true;
 }
 
 element {
     background-color:   @bg;
     text-color:         @fg;
-    padding:            5px 8px;
+    padding:            4px 8px;
+    spacing:            6px;
+    orientation:        horizontal;
+    children:           [ element-icon, element-text ];
+}
+
+element-icon {
+    size:               16px;
+    background-color:   inherit;
+    text-color:         inherit;
 }
 
 element selected.normal {
     background-color:   @highlight;
-    text-color:         @hilite-fg;
+    text-color:         #ffffff;
 }
 
 element-text {
     background-color:   inherit;
     text-color:         inherit;
+    highlight:          none;
+    vertical-align:     0.5;
 }
 
 element-text selected.normal {
-    text-color:         @hilite-fg;
+    background-color:   #000080;
+    text-color:         #ffffff;
+    highlight:          none;
 }

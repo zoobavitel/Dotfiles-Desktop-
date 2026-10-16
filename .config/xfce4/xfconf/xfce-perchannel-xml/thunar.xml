@@ -14,4 +14,5 @@
   <property name="misc-confirm-close-multiple-tabs" type="bool" value="false"/>
   <property name="last-window-width" type="int" value="495"/>
   <property name="last-window-height" type="int" value="508"/>
+  <property name="misc-directory-specific-settings" type="bool" value="true"/>
 </channel>

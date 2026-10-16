@@ -1,27 +1,26 @@
 #!/bin/bash
-# Win95-style Start Menu for Hyprland using rofi
-# Supports toggle: clicking Start again kills the menu
-
-# Toggle: if rofi is already running with our class, kill it and exit
-if pgrep -f "rofi.*win95-start" > /dev/null 2>&1; then
+# Toggle: only this start menu (rofi.*win95-start) (keep show-icons: true in theme).
+if pgrep -f "rofi.*win95-start" >/dev/null 2>&1; then
     pkill -f "rofi.*win95-start"
     exit 0
 fi
 
 ROFI_THEME="$HOME/.config/rofi/win95-start.rasi"
-ROFI_COMMON="-theme $ROFI_THEME -kb-cancel Escape,Super_L"
+# Icons stay on (rasi show-icons + -show-icons). Pin Chicago95 to avoid scanning every theme.
+ROFI_COMMON="-theme $ROFI_THEME -kb-cancel Escape,Super_L -show-icons -icon-theme SE98"
 
 main_menu() {
-    echo "📁 Programs"
-    echo "📄 Documents"
-    echo "🔍 Find Files"
-    echo "▶ Run..."
-    echo "───────────"
-    echo "🚪 Log Out"
-    echo "💤 Sleep"
-    echo "💾 Hibernate"
-    echo "🔄 Restart"
-    echo "⏻ Shut Down"
+    printf 'Programs\x00icon\x1ffolder\n'
+    printf 'Desktop\x00icon\x1fuser-desktop\n'
+    printf 'Documents\x00icon\x1ffolder-documents\n'
+    printf 'Find Files\x00icon\x1fedit-find\n'
+    printf 'Run...\x00icon\x1fsystem-run\n'
+    printf '───────────\n'
+    printf 'Log Out\x00icon\x1fsystem-log-out\n'
+    printf 'Suspend\x00icon\x1fsystem-suspend\n'
+    printf 'Hibernate\x00icon\x1fsystem-hibernate\n'
+    printf 'Restart\x00icon\x1fsystem-reboot\n'
+    printf 'Shut Down\x00icon\x1fsystem-shutdown\n'
 }
 
 programs_menu() {
@@ -32,75 +31,77 @@ programs_menu() {
         -scroll-method 0
 }
 
+desktop_menu() {
+    local list_output
+    list_output=$(for f in "$HOME/Desktop"/*.desktop; do
+        [ -f "$f" ] || continue
+        name=$(grep -m1 '^Name=' "$f" | cut -d= -f2-)
+        icon=$(grep -m1 '^Icon=' "$f" | cut -d= -f2-)
+        [ -z "$name" ] && name=$(basename "$f" .desktop)
+        [ -z "$icon" ] && icon="application-x-executable"
+        printf '%s\x00icon\x1f%s\n' "$name" "$icon"
+    done)
+
+    local selected
+    selected=$(printf '%s\n' "$list_output" | rofi -dmenu $ROFI_COMMON -p "Desktop")
+    [ -z "$selected" ] && return
+
+    for f in "$HOME/Desktop"/*.desktop; do
+        [ -f "$f" ] || continue
+        name=$(grep -m1 '^Name=' "$f" | cut -d= -f2-)
+        [ -z "$name" ] && name=$(basename "$f" .desktop)
+        if [ "$name" = "$selected" ]; then
+            gio launch "$f" &
+            break
+        fi
+    done
+}
+
 documents_menu() {
+    local selected
     selected=$(find "$HOME/Documents" "$HOME/Downloads" -maxdepth 2 \
-        -type f \
-        -printf '%T@ %p\n' 2>/dev/null \
-        | sort -rn \
-        | head -20 \
-        | cut -d' ' -f2- \
+        -type f -printf '%T@ %p\n' 2>/dev/null \
+        | sort -rn | head -20 | cut -d' ' -f2- \
         | sed "s|$HOME/||" \
-        | rofi -dmenu \
-            $ROFI_COMMON \
-            -p "Documents")
-    
-    if [ -n "$selected" ]; then
-        xdg-open "$HOME/$selected" &
-    fi
+        | rofi -dmenu $ROFI_COMMON -p "Documents")
+    [ -n "$selected" ] && xdg-open "$HOME/$selected" &
 }
 
 find_menu() {
-    query=$(rofi -dmenu \
-        $ROFI_COMMON \
-        -p "Find Files" \
-        -lines 0 \
-        -filter "")
+    local query
+    query=$(rofi -dmenu $ROFI_COMMON -p "Find Files" -lines 0 -filter "")
+    [ -z "$query" ] && return
 
-    if [ -n "$query" ]; then
-        if command -v fd &>/dev/null; then
-            results=$(fd --max-depth 5 "$query" "$HOME" 2>/dev/null | head -30)
-        else
-            results=$(find "$HOME" -maxdepth 5 -iname "*${query}*" 2>/dev/null | head -30)
-        fi
-
-        if [ -n "$results" ]; then
-            selected=$(echo "$results" \
-                | sed "s|$HOME/||" \
-                | rofi -dmenu \
-                    $ROFI_COMMON \
-                    -p "Results")
-            
-            if [ -n "$selected" ]; then
-                fullpath="$HOME/$selected"
-                if [ -d "$fullpath" ]; then
-                    thunar "$fullpath" &
-                else
-                    xdg-open "$fullpath" &
-                fi
-            fi
-        else
-            notify-send "Find" "No results for '$query'" --icon=dialog-information
-        fi
+    local -a results
+    if command -v fd &>/dev/null; then
+        mapfile -t results < <(fd --max-depth 5 "$query" "$HOME" 2>/dev/null | head -30)
+    else
+        mapfile -t results < <(find "$HOME" -maxdepth 5 -iname "*${query}*" 2>/dev/null | head -30)
     fi
+
+    [ ${#results[@]} -eq 0 ] && {
+        notify-send "Find" "No results for '$query'" --icon=dialog-information
+        return
+    }
+
+    local selected
+    selected=$(printf '%s\n' "${results[@]}" \
+        | sed "s|$HOME/||" \
+        | rofi -dmenu $ROFI_COMMON -p "Results")
+    [ -n "$selected" ] && xdg-open "$HOME/$selected" &
 }
 
 run_menu() {
-    cmd=$(rofi -dmenu \
-        $ROFI_COMMON \
-        -p "Run" \
-        -lines 0 \
-        -filter "")
-
-    if [ -n "$cmd" ]; then
-        eval "$cmd" &
-    fi
+    local cmd
+    cmd=$(rofi -dmenu $ROFI_COMMON -p "Run" -lines 0 -filter "")
+    [ -n "$cmd" ] && eval "$cmd" &
 }
 
-do_logout()   { hyprctl dispatch exit; }
-do_sleep()      { systemctl suspend; }
-do_hibernate()  { systemctl hibernate; }
-do_restart()    { systemctl reboot; }
-do_shutdown() { systemctl poweroff; }
+do_logout()    { hyprctl dispatch exit; }
+do_suspend()   { systemctl suspend; }
+do_hibernate() { systemctl hibernate; }
+do_restart()   { systemctl reboot; }
+do_shutdown()  { systemctl poweroff; }
 
 selected=$(main_menu | rofi -dmenu \
     $ROFI_COMMON \
@@ -113,14 +114,14 @@ selected=$(main_menu | rofi -dmenu \
     -yoffset -34)
 
 case "$selected" in
-    "📁 Programs")    programs_menu ;;
-    "📄 Documents")   documents_menu ;;
-    "🔍 Find Files")  find_menu ;;
-    "▶ Run...")        run_menu ;;
-    "🚪 Log Out")     do_logout ;;
-    "💤 Sleep")         do_sleep ;;
-    "💾 Hibernate")     do_hibernate ;;
-    "🔄 Restart")       do_restart ;;
-    "⏻ Shut Down")   do_shutdown ;;
-    "───────────")     ;; # separator
+    "Programs")    programs_menu ;;
+    "Desktop")     desktop_menu ;;
+    "Documents")   documents_menu ;;
+    "Find Files")  find_menu ;;
+    "Run...")       run_menu ;;
+    "Log Out")     do_logout ;;
+    "Suspend")     do_suspend ;;
+    "Hibernate")   do_hibernate ;;
+    "Restart")     do_restart ;;
+    "Shut Down")   do_shutdown ;;
 esac
