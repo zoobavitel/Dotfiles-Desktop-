@@ -1,183 +1,322 @@
-{
-    "layer": "top",
-    "position": "bottom",
-    "mod": "dock",
-    "exclusive": true,
-    "passthrough": false,
-    "gtk-layer-shell": true,
-    "height": 36,
-    "modules-left": [
-        "custom/powermenu",
-        "custom/separator",
-        "custom/terminal",
-        "custom/filemanager",
-        "custom/browser",
-        "custom/separator",
-        "hyprland/workspaces",
-        "custom/minimized"
-    ],
-    "modules-center": [
-        "mpris"
-    ],
-    "modules-right": [
-        "tray",
-        "custom/separator-right",
-        "custom/lact",
-        "custom/cputemp",
-        "custom/perf-mode",
-        "custom/separator-right",
-        "custom/pacman",
-        "pulseaudio",
-        "network",
-        "bluetooth",
-        "custom/separator-right",
-        "clock"
-    ],
-    "custom/powermenu": {
-        "format": "  Start",
-        "tooltip": false,
-        "on-click": "exec ~/.local/scripts/win95-start.sh"
-    },
-    "custom/separator": {
-        "format": "|",
-        "tooltip": false
-    },
-    "custom/separator-right": {
-        "format": "",
-        "tooltip": false
-    },
-    "custom/terminal": {
-        "format": "",
-        "tooltip-format": "Terminal",
-        "on-click": "kitty"
-    },
-    "custom/filemanager": {
-        "format": "",
-        "tooltip-format": "Files",
-        "on-click": "thunar"
-    },
-    "custom/browser": {
-        "format": "",
-        "tooltip-format": "Browser",
-        "on-click": "firefox"
-    },
-    "hyprland/window": {
-        "format": "{}",
-        "max-length": 50,
-        "rewrite": {
-            "": ""
-        }
-    },
-    "hyprland/workspaces": {
-        "disable-scroll": true,
-        "format": "{name}",
-        "all-outputs": true,
-        "on-click": "activate"
-    },
-    "custom/minimized": {
-        "exec": "~/.local/scripts/minimized_status.sh",
-        "return-type": "json",
-        "interval": 2,
-        "on-click": "bash ~/.local/scripts/restore_minimized.sh",
-        "on-click-right": "bash ~/.local/scripts/restore_minimized.sh",
-        "tooltip": false
-    },
-    "custom/perf-mode": {
-        "exec": "~/.local/scripts/waybar-perf-status",
-        "return-type": "json",
-        "interval": 5,
-        "signal": 8,
-        "on-click": "~/.local/scripts/waybar-perf-toggle",
-        "tooltip": true
-    },
-    "custom/cputemp": {
-        "exec": "~/.local/scripts/waybar-cputemp",
-        "interval": 5,
-        "tooltip": false
-    },
-    "custom/lact": {
-        "format": "🎮 GPU",
-        "tooltip-format": "Open LACT GPU Control",
-        "on-click": "lact",
-        "tooltip": true
-    },
-    "tray": {
-        "icon-size": 16,
-        "spacing": 6
-    },
-    "clock": {
-        "format": " {:%I:%M %p}",
-        "format-alt": "  {:%a, %b %e, %Y}",
-        "tooltip-format": "<tt><big>{calendar}</big></tt>"
-    },
-    "pulseaudio": {
-        "format": "{icon} {volume}%",
-        "tooltip": true,
-        "tooltip-format": "{volume}%",
-        "format-muted": "🔇 Muted",
-        "on-click": "pamixer -t",
-        "on-click-right": "exec pavucontrol",
-        "on-scroll-up": "pamixer -i 5 --allow-boost=true --set-limit=130",
-        "on-scroll-down": "pamixer -d 5 --allow-boost=true --set-limit=130",
-        "scroll-step": 5,
-        "format-icons": {
-            "headphone": " ",
-            "hands-free": " ",
-            "headset": " ",
-            "default": [
-                "🔈",
-                "🔉",
-                "🔊"
+[
+    {
+        "output": "DP-4",
+        "layer": "top",
+        "position": "bottom",
+        "mod": "dock",
+        "exclusive": true,
+        "passthrough": false,
+        "gtk-layer-shell": true,
+        "height": 36,
+        "modules-left": [
+            "custom/powermenu",
+            "custom/separator",
+            "custom/terminal",
+            "custom/filemanager",
+            "custom/browser",
+            "custom/separator",
+            "hyprland/workspaces",
+            "custom/minimized"
+        ],
+        "modules-center": [
+            "mpris"
+        ],
+        "modules-right": [
+            "tray",
+            "custom/separator-right",
+            "custom/lact",
+            "custom/cputemp",
+            "custom/perf-mode",
+            "custom/separator-right",
+            "custom/pacman",
+            "pulseaudio",
+            "network",
+            "bluetooth",
+            "custom/separator-right",
+            "clock"
+        ],
+        "custom/powermenu": {
+            "format": "  Start",
+            "tooltip": false,
+            "on-click": "exec ~/.local/scripts/win95-start.sh"
+        },
+        "custom/separator": {
+            "format": "|",
+            "tooltip": false
+        },
+        "custom/separator-right": {
+            "format": "",
+            "tooltip": false
+        },
+        "custom/terminal": {
+            "format": "",
+            "tooltip-format": "Terminal",
+            "on-click": "kitty"
+        },
+        "custom/filemanager": {
+            "format": "",
+            "tooltip-format": "Files",
+            "on-click": "thunar"
+        },
+        "custom/browser": {
+            "format": "",
+            "tooltip-format": "Browser",
+            "on-click": "firefox"
+        },
+        "hyprland/window": {
+            "format": "{}",
+            "max-length": 50,
+            "rewrite": {
+                "": ""
+            }
+        },
+        "hyprland/workspaces": {
+            "disable-scroll": true,
+            "format": "{name}",
+            "all-outputs": false,
+            "on-click": "activate"
+        },
+        "custom/minimized": {
+            "exec": "~/.local/scripts/minimized_status.sh",
+            "return-type": "json",
+            "interval": 2,
+            "on-click": "bash ~/.local/scripts/restore_minimized.sh",
+            "on-click-right": "bash ~/.local/scripts/restore_minimized.sh",
+            "tooltip": false
+        },
+        "custom/perf-mode": {
+            "exec": "~/.local/scripts/waybar-perf-status",
+            "return-type": "json",
+            "interval": 5,
+            "signal": 8,
+            "on-click": "~/.local/scripts/waybar-perf-toggle",
+            "tooltip": true
+        },
+        "custom/cputemp": {
+            "exec": "~/.local/scripts/waybar-cputemp",
+            "interval": 5,
+            "tooltip": false
+        },
+        "custom/lact": {
+            "format": "🎮 GPU",
+            "tooltip-format": "Open LACT GPU Control",
+            "on-click": "lact",
+            "tooltip": true
+        },
+        "tray": {
+            "icon-size": 16,
+            "spacing": 6
+        },
+        "clock": {
+            "format": " {:%I:%M %p}",
+            "format-alt": "  {:%a, %b %e, %Y}",
+            "tooltip-format": "<tt><big>{calendar}</big></tt>"
+        },
+        "pulseaudio": {
+            "format": "{icon} {volume}%",
+            "tooltip": true,
+            "tooltip-format": "{volume}%",
+            "format-muted": "🔇 Muted",
+            "on-click": "pamixer -t",
+            "on-click-right": "exec pavucontrol",
+            "on-scroll-up": "pamixer -i 5 --allow-boost=true --set-limit=130",
+            "on-scroll-down": "pamixer -d 5 --allow-boost=true --set-limit=130",
+            "scroll-step": 5,
+            "format-icons": {
+                "headphone": " ",
+                "hands-free": " ",
+                "headset": " ",
+                "default": [
+                    "🔈",
+                    "🔉",
+                    "🔊"
+                ]
+            }
+        },
+        "network": {
+            "interface": "enp191s0",
+            "tooltip": true,
+            "tooltip-format-ethernet": "{ifname} - {bandwidthDownBits}",
+            "interval": 2,
+            "format": "",
+            "format-disconnected": "",
+            "on-click-right": "nm-connection-editor"
+        },
+        "bluetooth": {
+            "format": "",
+            "format-disabled": "",
+            "format-connected": " {num_connections}",
+            "tooltip-format": "{device_alias}",
+            "tooltip-format-connected": " {device_enumerate}",
+            "tooltip-format-enumerate-connected": "{device_alias}",
+            "on-click-right": "blueman-manager"
+        },
+        "mpris": {
+            "title-len": 40,
+            "interval": 1,
+            "album-len": 0,
+            "max-len": 60,
+            "format": "{player_icon} {artist} - {title}",
+            "format-paused": "{player_icon} {artist} - {title}",
+            "player-icons": {
+                "default": "▶",
+                "mpv": "🎵",
+                "spotify": " ",
+                "firefox": ""
+            },
+            "status-icons": {
+                "paused": ""
+            },
+            "ignored-players": [
+                "vlc",
+                "brave",
+                "chromium"
             ]
+        },
+        "custom/pacman": {
+            "format": "📦 {}",
+            "interval": 600,
+            "exec": "/home/z/.local/bin/aur-guard-waybar-check",
+            "return-type": "json",
+            "exec-if": "exit 0",
+            "on-click": "kitty -e /home/z/.local/bin/aur-guard-waybar-update",
+            "tooltip": true
         }
     },
-    "network": {
-        "interface": "enp191s0",
-        "tooltip": true,
-        "tooltip-format-ethernet": "{ifname} - {bandwidthDownBits}",
-        "interval": 2,
-        "format": "",
-        "format-disconnected": "",
-        "on-click-right": "nm-connection-editor"
-    },
-    "bluetooth": {
-        "format": "",
-        "format-disabled": "",
-        "format-connected": " {num_connections}",
-        "tooltip-format": "{device_alias}",
-        "tooltip-format-connected": " {device_enumerate}",
-        "tooltip-format-enumerate-connected": "{device_alias}",
-        "on-click-right": "blueman-manager"
-    },
-    "mpris": {
-        "title-len": 40,
-        "interval": 1,
-        "album-len": 0,
-        "max-len": 60,
-        "format": "{player_icon} {artist} - {title}",
-        "format-paused": "{player_icon} {artist} - {title}",
-        "player-icons": {
-            "default": "▶",
-            "mpv": "🎵",
-            "spotify": " ",
-            "firefox": ""
+    {
+        "output": "!DP-4",
+        "name": "side",
+        "layer": "top",
+        "position": "bottom",
+        "exclusive": true,
+        "height": 36,
+        "modules-left": [
+            "custom/powermenu",
+            "hyprland/workspaces",
+            "custom/minimized"
+        ],
+        "modules-center": [
+            "mpris"
+        ],
+        "modules-right": [
+            "custom/lact",
+            "custom/cputemp",
+            "custom/perf-mode",
+            "custom/separator-right",
+            "custom/pacman",
+            "pulseaudio",
+            "bluetooth",
+            "custom/separator-right",
+            "clock"
+        ],
+        "custom/powermenu": {
+            "format": "  Start",
+            "tooltip": false,
+            "on-click": "exec ~/.local/scripts/win95-start.sh"
         },
-        "status-icons": {
-            "paused": ""
+        "hyprland/workspaces": {
+            "disable-scroll": true,
+            "format": "{name}",
+            "all-outputs": false,
+            "on-click": "activate"
         },
-        "ignored-players": [
-            "vlc",
-            "brave",
-            "chromium"
-        ]
-    },
-    "custom/pacman": {
-        "format": "📦 {}",
-        "interval": 600,
-        "exec": "/home/z/.local/bin/aur-guard-waybar-check",
-        "return-type": "json",
-        "exec-if": "exit 0",
-        "on-click": "kitty -e /home/z/.local/bin/aur-guard-waybar-update",
-        "tooltip": true
+        "custom/minimized": {
+            "exec": "~/.local/scripts/minimized_status.sh",
+            "return-type": "json",
+            "interval": 2,
+            "on-click": "bash ~/.local/scripts/restore_minimized.sh",
+            "on-click-right": "bash ~/.local/scripts/restore_minimized.sh",
+            "tooltip": false
+        },
+        "mpris": {
+            "title-len": 18,
+            "interval": 1,
+            "album-len": 0,
+            "artist-len": 12,
+            "max-len": 28,
+            "format": "{player_icon} {artist} - {title}",
+            "format-paused": "{player_icon} {artist} - {title}",
+            "player-icons": {
+                "default": "▶",
+                "mpv": "🎵",
+                "spotify": " ",
+                "firefox": ""
+            },
+            "status-icons": {
+                "paused": ""
+            },
+            "ignored-players": [
+                "vlc",
+                "brave",
+                "chromium"
+            ]
+        },
+        "custom/lact": {
+            "format": "🎮 GPU",
+            "tooltip-format": "Open LACT GPU Control",
+            "on-click": "lact",
+            "tooltip": true
+        },
+        "custom/cputemp": {
+            "exec": "~/.local/scripts/waybar-cputemp",
+            "interval": 5,
+            "tooltip": false
+        },
+        "custom/perf-mode": {
+            "exec": "~/.local/scripts/waybar-perf-status",
+            "return-type": "json",
+            "interval": 5,
+            "signal": 8,
+            "on-click": "~/.local/scripts/waybar-perf-toggle",
+            "tooltip": true
+        },
+        "clock": {
+            "format": " {:%I:%M %p}",
+            "format-alt": "  {:%a, %b %e, %Y}",
+            "tooltip-format": "<tt><big>{calendar}</big></tt>"
+        },
+        "custom/pacman": {
+            "format": "📦 {}",
+            "interval": 600,
+            "exec": "/home/z/.local/bin/aur-guard-waybar-check",
+            "return-type": "json",
+            "exec-if": "exit 0",
+            "on-click": "kitty -e /home/z/.local/bin/aur-guard-waybar-update",
+            "tooltip": true
+        },
+        "pulseaudio": {
+            "format": "{icon} {volume}%",
+            "tooltip": true,
+            "tooltip-format": "{volume}%",
+            "format-muted": "🔇 Muted",
+            "on-click": "pamixer -t",
+            "on-click-right": "exec pavucontrol",
+            "on-scroll-up": "pamixer -i 5 --allow-boost=true --set-limit=130",
+            "on-scroll-down": "pamixer -d 5 --allow-boost=true --set-limit=130",
+            "scroll-step": 5,
+            "format-icons": {
+                "headphone": " ",
+                "hands-free": " ",
+                "headset": " ",
+                "default": [
+                    "🔈",
+                    "🔉",
+                    "🔊"
+                ]
+            }
+        },
+        "bluetooth": {
+            "format": "",
+            "format-disabled": "",
+            "format-connected": " {num_connections}",
+            "tooltip-format": "{device_alias}",
+            "tooltip-format-connected": " {device_enumerate}",
+            "tooltip-format-enumerate-connected": "{device_alias}",
+            "on-click-right": "blueman-manager"
+        },
+        "custom/separator-right": {
+            "format": "",
+            "tooltip": false
+        }
     }
-}
+]

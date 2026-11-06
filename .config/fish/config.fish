@@ -2,6 +2,9 @@ if status is-interactive
     # Aliases
     alias ls='ls --color=auto'
     alias grep='grep --color=auto'
+    if command -q kitten
+        alias ssh="kitten ssh"
+    end
     alias dot='git --git-dir=/home/z/git/Dotfiles-Desktop-/.git --work-tree=/home/z'
     # PATH
     fish_add_path ~/.local/bin

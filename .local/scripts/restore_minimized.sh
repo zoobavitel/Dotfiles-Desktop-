@@ -12,7 +12,7 @@ SELECTED=$(echo "$MENU" | wofi --dmenu --prompt "Restore:")
 IDX=$(echo "$SELECTED" | awk '{print $1}')
 ADDRESS=$(echo "$WINDOWS_JSON" | jq -r ".[$IDX].address")
 CURRENT_WS=$(hyprctl activeworkspace -j | jq -r '.id')
-hyprctl dispatch movetoworkspace "$CURRENT_WS,address:$ADDRESS"
+hyprctl dispatch "hl.dsp.window.move({ window = \"address:$ADDRESS\", workspace = $CURRENT_WS })"
 
 
 

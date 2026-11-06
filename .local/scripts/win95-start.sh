@@ -5,6 +5,9 @@ if pgrep -f "rofi.*win95-start" >/dev/null 2>&1; then
     exit 0
 fi
 
+# Start button click
+pw-play "$HOME/.local/share/sounds/Windows95/stereo/menu-popup.wav" &
+
 ROFI_THEME="$HOME/.config/rofi/win95-start.rasi"
 # Icons stay on (rasi show-icons + -show-icons). Pin Chicago95 to avoid scanning every theme.
 ROFI_COMMON="-theme $ROFI_THEME -kb-cancel Escape,Super_L -show-icons -icon-theme SE98"
@@ -28,7 +31,8 @@ programs_menu() {
         $ROFI_COMMON \
         -display-drun "Programs" \
         -drun-display-format "{name}" \
-        -scroll-method 0
+        -scroll-method 0 \
+        -no-hover-select
 }
 
 desktop_menu() {
@@ -97,11 +101,11 @@ run_menu() {
     [ -n "$cmd" ] && eval "$cmd" &
 }
 
-do_logout()    { hyprctl dispatch exit; }
+do_logout()    { "$HOME/.local/scripts/win95-session.sh" logout; }
 do_suspend()   { systemctl suspend; }
 do_hibernate() { systemctl hibernate; }
-do_restart()   { systemctl reboot; }
-do_shutdown()  { systemctl poweroff; }
+do_restart()   { "$HOME/.local/scripts/win95-session.sh" restart; }
+do_shutdown()  { "$HOME/.local/scripts/win95-session.sh" shutdown; }
 
 selected=$(main_menu | rofi -dmenu \
     $ROFI_COMMON \

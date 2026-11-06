@@ -204,3 +204,8 @@ tooltip {
   border-right: 1px solid #ffffff;
   border-bottom: 1px solid #ffffff;
 }
+
+/* side (HDMI) bar: tighter music box */
+window#waybar.side #mpris {
+  padding: 2px 4px;
+}

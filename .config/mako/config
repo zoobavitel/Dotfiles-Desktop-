@@ -30,8 +30,10 @@ background-color=#c0c0c0
 text-color=#000000
 border-color=#000000
 progress-color=over #808080
+on-notify=exec pw-play /home/z/.local/share/sounds/Windows95/stereo/message.wav
 
 [urgency=low]
+on-notify=none
 border-color=#808080
 text-color=#808080
 default-timeout=2000
@@ -41,12 +43,14 @@ border-color=#000000
 default-timeout=5000
 
 [urgency=high]
+on-notify=exec pw-play /home/z/.local/share/sounds/Windows95/stereo/dialog-error.wav
 background-color=#000080
 text-color=#ffffff
 border-color=#000000
 default-timeout=0
 
 [category=mpd]
+on-notify=none
 border-color=#000080
 default-timeout=2000
 group-by=category
